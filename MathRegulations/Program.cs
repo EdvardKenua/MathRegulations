@@ -4,59 +4,94 @@ using System.Collections.Generic;
 
 namespace FromStringToMath // Note: actual namespace depends on the project name.
 {
+    class ConverterExpression
+    {
+        private string rawExpression;
+        private string numExpression;
+        private string result;
+        public string RawExpression
+        {
+            get { return rawExpression; }
+            set { rawExpression = value; }
+        }
+        public string Result
+        {
+            get { return result; }
+        }
+        public string NumExpression
+        {
+            get { return numExpression; }
+        }
+        private Dictionary<string, string> Variables;
+        public List<string> ListKeys;
+
+        public ConverterExpression(string rawExpression)
+        {
+            this.rawExpression = rawExpression;
+            ListKeys = FindVariables();
+
+        }
+
+        private void SetResultVariable(string Variable) 
+        {
+            
+        }
+
+        public double GetResult()
+        {
+            return 0.0;
+        }
+        /// <summary> Работа с библиотекой Angouri
+        private void ConvertToAngouri() 
+        {
+           // Строит выражение для конвертации
+        }
+        private void BuildExpression() 
+        {
+            // Преобразует выражение
+        }
+        /// </summary>
+        
+        private List<string> FindVariables() 
+        {
+            // Находит буквы и заносит их в список
+            List<string> letters = new List<string>();
+            foreach (char item in rawExpression)
+            {
+                // узнаем какие символы у нас записаны
+                if (Char.IsLetter(item) == true)
+                {
+                    letters.Add(item.ToString());
+                }
+            }
+            return letters; 
+        }
+        private void SetKeys(List<string> Keys) 
+        {
+            // Устанавливает значения ключей из списка 2
+        }
+        public void SetKeysWithVariables(Dictionary<string,string> keyValuePairs) 
+        {
+            Variables = keyValuePairs;
+        }
+
+
+    }
+
     internal class Program
     {   
-        //public static Dictionary<string, string> elements = new Dictionary<string, string>();
-        //static void Main(string[] args)
-        //{
-        //    //string expresions = "";
-        //    //expresions = Console.ReadLine();
-        //    //Entity entity = expresions;
-        //    //Console.WriteLine(entity.Solve(""));
-        //    //string v = (entity.Solve("x").ToString());
-            
-        //    for (int i = 0; i < 2; i++)
-        //    {
-        //        elements.Add(Console.ReadLine(), null);
-        //    }
-        //    foreach (var item in elements)
-        //    {
-        //        Console.WriteLine($"Key: {item.Key}: {item.Value}");
-        //    }
-        //    for (int i = 0; i < elements.Count; i++)
-        //    {
-        //        string letter = Console.ReadLine();
-        //        elements[letter] = Console.ReadLine();
-        //    }
-
-        //    foreach (var item in elements)
-        //    {
-        //        Console.WriteLine($"Key: {item.Key}: {item.Value}");
-        //    }
-        //    Console.Write("Введите выражение:");
-        //    // x = a + b
-        //    string expres = Console.ReadLine();
-        //    Console.WriteLine(Changer(expres));
-        //    Entity entity = Changer(expres);
-        //    Console.WriteLine(entity.Solve("x").ToString());
-
-        //}
-
-        //public static string Changer(string rawExpres)
-        //{
-        //    string newExpres = "";
-        //    for (int item = 0; item < rawExpres.Length; item++)
-        //    {
-        //        if (elements.ContainsKey(rawExpres[item].ToString()))
-        //        {
-        //            newExpres += elements[rawExpres[item].ToString()];
-        //            continue;
-        //        }
-        //        newExpres += rawExpres[item];
-        //    }
-
-        //    return newExpres;
-        //}
-
+        public static void Main()
+        {
+            string expression = "x = a + b";
+            var Converter = new ConverterExpression(expression);
+            var dict = new Dictionary<string, string>();
+            foreach (var key in Converter.ListKeys)
+            {
+                Console.Write($"Введите значение для: {key}");
+                string value = Console.ReadLine();
+                dict.Add(key, value);
+            }
+            Converter.SetKeysWithVariables(dict);
+        }
     }
 }
